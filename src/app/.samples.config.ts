@@ -1,8 +1,10 @@
+import { environment } from '../environments/environment';
+
 export default {
   oidc: {
     clientId: '0oagfyv9jseOXg0oP0h7',
     issuer: 'https://identity-np.swissre.com/oauth2/ausggbrfgxYHfA9FH0h7',
-    redirectUri: process.env.REDIRECT_URI || 'http://spa.ac-np.swissre.com/implicit/callback',
+    redirectUri: environment.redirrectUrl,
     scope: 'openid',
   },
   resourceServer: {

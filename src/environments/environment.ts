@@ -17,5 +17,5 @@
 
 export const environment = {
   production: false,
-  redirrectUrl: 'http://localhost:8080/implicit/callback',
+  redirrectUrl: 'http://localhost:4200/implicit/callback',
 };

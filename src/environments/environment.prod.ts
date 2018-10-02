@@ -12,5 +12,5 @@
 
 export const environment = {
   production: true,
-  redirrectUrl: 'http://spa.ac-np.swissre.com/implicit/callback',
+  redirrectUrl: 'https://spa.ac-np.swissre.com/implicit/callback',
 };

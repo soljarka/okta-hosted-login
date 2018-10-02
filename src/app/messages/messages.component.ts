@@ -42,13 +42,10 @@ export class MessagesComponent implements OnInit {
       }
     }).subscribe((data: any) => {
       let index = 1;
-      const messages = data.messages.map((message) => {
-        const date = new Date(message.date);
-        const day = date.toLocaleDateString();
-        const time = date.toLocaleTimeString();
+      const messages = data.map((message) => {
         return {
-          date: `${day} ${time}`,
-          text: message.text,
+          id: message.id,
+          name: message.name,
           index: index++
         };
       });

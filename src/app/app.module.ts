@@ -42,7 +42,7 @@ const appRoutes: Routes = [
     canActivate: [ OktaAuthGuard ],
   },
   {
-    path: 'messages',
+    path: 'beers',
     component: MessagesComponent,
     canActivate: [ OktaAuthGuard ],
   },

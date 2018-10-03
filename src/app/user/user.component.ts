@@ -13,66 +13,46 @@
 import { Component, OnInit } from '@angular/core';
 import { OktaAuthService } from '@okta/okta-angular';
 import { HttpClient } from '@angular/common/http';
-
 import sampleConfig from '../.samples.config';
 
-interface Message {
-  date: String,
-  text: String,
+interface Claim {
+  claim: String;
+  value: String;
 }
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class MessagesComponent implements OnInit {
-  failed: Boolean;
-  messages: Array<Message> [];
-  awsbeers: Array<Message> [];
+export class UserComponent implements OnInit {
+  claims: Array<Claim>;
+    failed: Boolean;
 
   constructor(public oktaAuth: OktaAuthService, private http: HttpClient) {
-    this.messages = [];
-    this.awsbeers = [];
+    this.claims = [];
   }
 
   async ngOnInit() {
     const accessToken = await this.oktaAuth.getAccessToken();
-    this.http.get(sampleConfig.resourceServer.messagesUrl, {
+    this.http.get(sampleConfig.resourceServer.userUrl, {
       headers: {
         Authorization: 'Bearer ' + accessToken,
       }
     }).subscribe((data: any) => {
-      let index = 1;
-      const messages = data.map((message) => {
+        console.log(data);
+      const claims = Object.keys(data).map((key) => {
         return {
-          id: message.id,
-          name: message.name,
-          index: index++
-        };
+          claim: key,
+          value: data[key]
+         };
       });
-      [].push.apply(this.messages, messages);
-    }, (err) => {
-      console.error(err);
-      this.failed = true;
-    });
-    this.http.get(sampleConfig.resourceServer.amazonBeersUrl, {
-      headers: {
-        Authorization: 'Bearer ' + accessToken,
-      }
-    }).subscribe((data: any) => {
-      let index = 1;
-      const awsbeers = data.map((message) => {
-        return {
-          id: message.id,
-          name: message.name,
-          index: index++
-        };
-      });
-      [].push.apply(this.awsbeers, awsbeers);
+      [].push.apply(this.claims, claims);
     }, (err) => {
       console.error(err);
       this.failed = true;
     });
   }
+
+
 }

@@ -25,7 +25,9 @@ import config from './.samples.config';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MessagesComponent } from './messages/messages.component';
+import { CarsComponent } from './cars/cars.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './user/user.component';
 
 const appRoutes: Routes = [
   {
@@ -46,6 +48,16 @@ const appRoutes: Routes = [
     component: MessagesComponent,
     canActivate: [ OktaAuthGuard ],
   },
+  {
+    path: 'cars',
+    component: CarsComponent,
+    canActivate: [ OktaAuthGuard ],
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    canActivate: [ OktaAuthGuard ],
+  },
 ];
 
 @NgModule({
@@ -53,7 +65,9 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    MessagesComponent
+    MessagesComponent,
+    CarsComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,30 @@
+<h1 class="ui header">
+  <i aria-hidden="true" class="mail outline icon"></i> My Cars
+</h1>
+<div *ngIf="failed" class="ui error message">
+  <div class="content">
+    <div class="header">Failed to fetch messages. Please verify the following:</div>
+    <ul class="list">
+      <li class="content">Resource server is running in Azure and is secured</li>
+      <li class="content">Your resource server example is using the same Okta authorization server (issuer) that you have configured this Angular
+        application to use.</li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="messages.length">
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of messages" id="message-{{message.index}}">
+        <td>{{message.id}}</td>
+        <td>{{message.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

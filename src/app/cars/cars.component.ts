@@ -16,60 +16,40 @@ import { HttpClient } from '@angular/common/http';
 
 import sampleConfig from '../.samples.config';
 
-interface Message {
+interface Car {
   date: String,
   text: String,
 }
 
 @Component({
-  selector: 'app-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.css']
+  selector: 'app-cars',
+  templateUrl: './cars.component.html',
+  styleUrls: ['./cars.component.css']
 })
-export class MessagesComponent implements OnInit {
+export class CarsComponent implements OnInit {
   failed: Boolean;
-  messages: Array<Message> [];
-  awsbeers: Array<Message> [];
+  messages: Array<Car> [];
 
   constructor(public oktaAuth: OktaAuthService, private http: HttpClient) {
     this.messages = [];
-    this.awsbeers = [];
   }
 
   async ngOnInit() {
     const accessToken = await this.oktaAuth.getAccessToken();
-    this.http.get(sampleConfig.resourceServer.messagesUrl, {
+    this.http.get(sampleConfig.resourceServer.carsUrl, {
       headers: {
         Authorization: 'Bearer ' + accessToken,
       }
     }).subscribe((data: any) => {
       let index = 1;
-      const messages = data.map((message) => {
+      const messages = data._embedded.cars.map((message) => {
         return {
-          id: message.id,
+          id: index++,
           name: message.name,
           index: index++
         };
       });
       [].push.apply(this.messages, messages);
-    }, (err) => {
-      console.error(err);
-      this.failed = true;
-    });
-    this.http.get(sampleConfig.resourceServer.amazonBeersUrl, {
-      headers: {
-        Authorization: 'Bearer ' + accessToken,
-      }
-    }).subscribe((data: any) => {
-      let index = 1;
-      const awsbeers = data.map((message) => {
-        return {
-          id: message.id,
-          name: message.name,
-          index: index++
-        };
-      });
-      [].push.apply(this.awsbeers, awsbeers);
     }, (err) => {
       console.error(err);
       this.failed = true;

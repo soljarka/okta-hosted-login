@@ -1,5 +1,5 @@
 <h1 class="ui header">
-  <i aria-hidden="true" class="mail outline icon"></i> My Beers
+  <i aria-hidden="true" class="mail outline icon"></i> Go for Azure Beers
 </h1>
 <div *ngIf="failed" class="ui error message">
   <div class="content">
@@ -22,6 +22,36 @@
     </thead>
     <tbody>
       <tr *ngFor="let message of messages" id="message-{{message.index}}">
+        <td>{{message.id}}</td>
+        <td>{{message.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h1 class="ui header">
+  <i aria-hidden="true" class="mail outline icon"></i> Go for Amazon Beers
+</h1>
+<div *ngIf="failed" class="ui error message">
+  <div class="content">
+    <div class="header">Failed to fetch messages. Please verify the following:</div>
+    <ul class="list">
+      <li class="content">You've downloaded one of our resource server examples, and it's running on port 8000.</li>
+      <li class="content">Your resource server example is using the same Okta authorization server (issuer) that you have configured this Angular
+        application to use.</li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="messages.length">
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of awsbeers" id="aws-beers-{{message.index}}">
         <td>{{message.id}}</td>
         <td>{{message.name}}</td>
       </tr>
